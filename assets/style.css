@@ -1,0 +1,248 @@
+/* --- 1. CONFIGURATION --- */
+:root {
+    --primary: #4f46e5;       
+    --secondary: #6366f1;     
+    --dark: #0f172a;          
+    --light: #f8fafc;         
+    --text-main: #334155;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --blob-color: rgba(79, 70, 229, 0.1);
+    --nav-bg: rgba(255, 255, 255, 0.85);
+    --border-color: rgba(0,0,0,0.05);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--light);
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    scroll-behavior: smooth;
+}
+
+/* --- SCROLL OFFSET FIX --- */
+section {
+    scroll-margin-top: 100px;
+}
+
+/* --- DARK MODE CONFIGURATION --- */
+body.dark-mode {
+    --light: #020617;
+    --text-main: #e2e8f0;
+    --card-bg: rgba(30, 41, 59, 0.95);
+    --blob-color: rgba(99, 102, 241, 0.15);
+    --nav-bg: rgba(15, 23, 42, 0.95);
+    --border-color: rgba(255,255,255,0.1);
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
+body.dark-mode h4, body.dark-mode h5, body.dark-mode h6, 
+body.dark-mode p, body.dark-mode span, body.dark-mode small {
+    color: var(--text-main);
+}
+
+body.dark-mode .text-muted {
+    color: #94a3b8 !important;
+}
+
+body.dark-mode .about-card, 
+body.dark-mode .skill-box, 
+body.dark-mode .social-btn {
+    border-color: var(--border-color);
+}
+
+body.dark-mode .social-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+body.dark-mode .modal-content {
+    background-color: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+body.dark-mode .theme-badge {
+    background-color: var(--card-bg) !important;
+    color: var(--primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+/* --- BACK TO TOP BUTTON --- */
+#btn-back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: none;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    transition: 0.3s;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-back-to-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+    background: var(--secondary);
+}
+
+/* --- NAVBAR --- */
+.navbar {
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    transition: 0.3s;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--text-main) !important;
+    margin: 0 5px;
+}
+
+.nav-link:hover, .nav-link.active { color: var(--primary) !important; }
+
+/* --- HERO & PROFILE PICTURE --- */
+.hero {
+    padding-top: 140px;
+    padding-bottom: 80px;
+    position: relative;
+}
+
+.bg-shape {
+    position: absolute;
+    width: 400px; height: 400px;
+    background: var(--blob-color);
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: float-bg 8s infinite alternate ease-in-out;
+}
+
+.shape-1 { top: -5%; right: -5%; }
+.shape-2 { bottom: 5%; left: -10%; background: rgba(236, 72, 153, 0.1); }
+
+@keyframes float-bg {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 30px); }
+}
+
+.profile-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 15px;
+}
+
+.profile-back {
+    position: absolute;
+    top: 0; right: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 24px;
+    transform: rotate(5deg);
+    opacity: 0.15;
+    transition: 0.4s;
+}
+
+.profile-img {
+    position: relative;
+    z-index: 2;
+    border-radius: 20px;
+    transform: rotate(-3deg);
+    transition: 0.4s;
+    border: 4px solid rgba(255,255,255,0.8);
+    width: 100%;
+    max-width: 320px;
+    object-fit: cover;
+}
+
+body.dark-mode .profile-img {
+    border-color: rgba(255,255,255,0.2);
+}
+
+.profile-wrapper:hover .profile-img {
+    transform: rotate(0deg) scale(1.02);
+    box-shadow: 0 15px 30px rgba(79, 70, 229, 0.2);
+}
+
+.profile-wrapper:hover .profile-back {
+    transform: rotate(8deg);
+}
+
+/* --- ABOUT SECTION --- */
+.about-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-color);
+}
+
+/* --- SKILLS GRID --- */
+.skill-box {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--border-color);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.skill-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.1);
+    border-color: var(--primary);
+}
+
+.skill-box img { width: 45px; height: 45px; margin-bottom: 10px; }
+.skill-name { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
+
+/* --- CONTACT ICONS --- */
+.social-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: 0.3s;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+}
+
+.social-btn:hover {
+    transform: translateY(-5px);
+    color: white;
+}
+
+.btn-mail:hover { background: #EA4335; border-color: #EA4335; }
+.btn-linkedin:hover { background: #0077b5; border-color: #0077b5; }
+.btn-github:hover { background: #333; border-color: #333; }
+
+/* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    .hero { text-align: center; padding-top: 100px; }
+    .hero h1 { font-size: 2.2rem; }
+    .profile-wrapper { margin-top: 40px; }
+    .bg-shape { display: none; } 
+    .about-card { padding: 25px; }
+    #btn-back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+}
