@@ -1,165 +1,211 @@
-/* --- 1. CONFIGURATION --- */
+/* --- 1. CONFIGURATION (Variabel Global) --- */
+/* Bagian ini mendefinisikan warna dan variabel yang akan digunakan berulang kali di seluruh website. 
+   Tujuannya agar jika ingin mengganti warna tema, cukup ubah di satu tempat saja. */
 :root {
-    --primary: #4f46e5;       
-    --secondary: #6366f1;     
-    --dark: #0f172a;          
-    --light: #f8fafc;         
-    --text-main: #334155;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --blob-color: rgba(79, 70, 229, 0.1);
-    --nav-bg: rgba(255, 255, 255, 0.85);
-    --border-color: rgba(0,0,0,0.05);
+    --primary: #4f46e5;       /* Warna utama (Indigo/Biru Tua) */
+    --secondary: #6366f1;     /* Warna sekunder untuk efek hover */
+    --dark: #0f172a;          /* Warna dasar gelap */
+    --light: #f8fafc;         /* Warna latar belakang terang */
+    --text-main: #334155;     /* Warna utama teks */
+    --card-bg: rgba(255, 255, 255, 0.9); /* Latar belakang kartu transparan */
+    --blob-color: rgba(79, 70, 229, 0.1); /* Warna untuk hiasan lingkaran blur */
+    --nav-bg: rgba(255, 255, 255, 0.85); /* Latar belakang navigasi dengan efek kaca */
+    --border-color: rgba(0,0,0,0.05);    /* Warna garis tepi halus */
 }
 
+/* Pengaturan dasar untuk seluruh halaman */
 body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background-color: var(--light);
-    color: var(--text-main);
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', sans-serif; /* Menggunakan font modern */
+    background-color: var(--light); /* Mengatur warna background dari variabel --light */
+    color: var(--text-main);        /* Mengatur warna teks utama */
+    overflow-x: hidden;             /* Mencegah halaman geser ke samping (scroll horizontal) */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Animasi halus saat ganti tema */
+    scroll-behavior: smooth;        /* Efek scroll yang halus saat klik menu navigasi */
 }
 
 /* --- SCROLL OFFSET FIX --- */
+/* Memberikan jarak di atas setiap section agar teks tidak tertutup navbar saat di-klik */
 section {
     scroll-margin-top: 100px;
 }
 
-/* --- DARK MODE CONFIGURATION --- */
+/* --- DARK MODE CONFIGURATION (Tema Gelap) --- */
+/* Bagian ini akan otomatis aktif jika elemen <body> memiliki class 'dark-mode' melalui JavaScript */
 body.dark-mode {
-    --light: #020617;
-    --text-main: #e2e8f0;
-    --card-bg: rgba(30, 41, 59, 0.95);
-    --blob-color: rgba(99, 102, 241, 0.15);
-    --nav-bg: rgba(15, 23, 42, 0.95);
-    --border-color: rgba(255,255,255,0.1);
+    --light: #020617;      /* Mengubah background menjadi hitam pekat */
+    --text-main: #e2e8f0;  /* Mengubah teks menjadi putih abu-abu */
+    --card-bg: rgba(30, 41, 59, 0.95); /* Menggelapkan background kartu */
+    --blob-color: rgba(99, 102, 241, 0.15); /* Mengubah warna hiasan blur */
+    --nav-bg: rgba(15, 23, 42, 0.95); /* Navbar menjadi gelap */
+    --border-color: rgba(255,255,255,0.1); /* Garis tepi menjadi terang halus */
 }
 
+/* Memastikan semua jenis teks di Dark Mode berwarna terang sesuai variabel --text-main */
 body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
 body.dark-mode h4, body.dark-mode h5, body.dark-mode h6, 
 body.dark-mode p, body.dark-mode span, body.dark-mode small {
     color: var(--text-main);
 }
 
+/* Mengatur warna teks sekunder di Dark Mode agar tidak terlalu mencolok */
 body.dark-mode .text-muted {
     color: #94a3b8 !important;
 }
 
+/* Mengatur border elemen-elemen tertentu di Dark Mode */
 body.dark-mode .about-card, 
 body.dark-mode .skill-box, 
 body.dark-mode .social-btn {
     border-color: var(--border-color);
 }
 
+/* Efek hover tombol sosial media di Dark Mode */
 body.dark-mode .social-btn:hover {
     background-color: #fff;
     color: #000;
 }
 
+/* Pengaturan tampilan modal popup di Dark Mode */
 body.dark-mode .modal-content {
     background-color: var(--card-bg);
     color: var(--text-main);
     border: 1px solid var(--border-color);
 }
 
+/* Membuat tombol 'X' (close) di Dark Mode menjadi putih agar terlihat */
 body.dark-mode .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
 }
 
+/* Mengatur tampilan badge 'Halo' di atas nama agar tetap jelas di Dark Mode */
 body.dark-mode .theme-badge {
     background-color: var(--card-bg) !important;
     color: var(--primary) !important;
     border-color: var(--border-color) !important;
 }
 
-/* --- BACK TO TOP BUTTON --- */
+/* --- BACK TO TOP BUTTON (Tombol Kembali ke Atas) --- */
 #btn-back-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    display: none;
-    z-index: 999;
+    position: fixed; /* Tetap di posisi meski layar di-scroll */
+    bottom: 30px;    /* Jarak dari bawah */
+    right: 30px;     /* Jarak dari kanan */
+    display: none;   /* Awalnya disembunyikan (akan muncul via JS) */
+    z-index: 999;    /* Memastikan tombol berada di lapisan paling atas */
     width: 50px;
     height: 50px;
-    border-radius: 50%;
+    border-radius: 50%; /* Membuat tombol bulat sempurna */
     background: var(--primary);
     color: white;
     border: none;
-    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4); /* Memberi bayangan agar terlihat timbul */
     transition: 0.3s;
     align-items: center;
     justify-content: center;
 }
 
+/* Animasi saat tombol di-hover mouse */
 #btn-back-to-top:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); /* Tombol naik sedikit */
     box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
     background: var(--secondary);
 }
 
-/* --- NAVBAR --- */
+/* --- NAVBAR (Navigasi Atas) --- */
 .navbar {
     background: var(--nav-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px); /* Efek blur kaca di belakang navbar */
     padding: 15px 0;
     transition: 0.3s;
     border-bottom: 1px solid var(--border-color);
 }
 
+/* Pengaturan gaya teks link di menu navigasi */
 .nav-link {
     font-weight: 600;
     color: var(--text-main) !important;
-    margin: 0 5px;
+    position: relative; /* Menjadi acuan untuk garis bawah indikator aktif */
+    padding: 0.5rem 1rem;
+    transition: 0.3s;
 }
 
+/* Tampilan teks menu saat aktif (sedang dibuka/scroll di sana) */
+.nav-link.active {
+    color: var(--primary) !important;
+    font-weight: 700;
+}
+
+/* Membuat garis indikator ungu di bawah menu yang sedang aktif */
+.nav-link.active::after {
+    content: '';
+    display: block;
+    width: 80%;       /* Panjang garis hanya 80% dari lebar teks */
+    height: 3px;
+    background: var(--primary);
+    position: absolute;
+    bottom: -2px;     /* Posisi tepat di bawah teks */
+    left: 10%;        /* Mengatur posisi agar garis di tengah teks */
+    border-radius: 10px;
+}
+
+/* Memberikan warna primer saat menu di-hover atau aktif */
 .nav-link:hover, .nav-link.active { color: var(--primary) !important; }
 
-/* --- HERO & PROFILE PICTURE --- */
+/* Menjamin ikon matahari/bulan transisinya halus */
+#theme-toggle i {
+    transition: 0.3s;
+}
+
+/* --- HERO & PROFILE PICTURE (Bagian Utama Atas) --- */
 .hero {
-    padding-top: 140px;
+    padding-top: 140px; /* Jarak agar tidak tertutup navbar */
     padding-bottom: 80px;
     position: relative;
 }
 
+/* Hiasan lingkaran blur (blob) di latar belakang Hero */
 .bg-shape {
     position: absolute;
     width: 400px; height: 400px;
     background: var(--blob-color);
     border-radius: 50%;
-    filter: blur(80px);
-    z-index: -1;
-    animation: float-bg 8s infinite alternate ease-in-out;
+    filter: blur(80px); /* Memberikan efek blur sangat lembut */
+    z-index: -1;        /* Berada di belakang konten utama */
+    animation: float-bg 8s infinite alternate ease-in-out; /* Animasi bergerak pelan */
 }
 
-.shape-1 { top: -5%; right: -5%; }
-.shape-2 { bottom: 5%; left: -10%; background: rgba(236, 72, 153, 0.1); }
+.shape-1 { top: -5%; right: -5%; } /* Posisi blob atas kanan */
+.shape-2 { bottom: 5%; left: -10%; background: rgba(236, 72, 153, 0.1); } /* Posisi blob bawah kiri (warna pink) */
 
+/* Definisi animasi untuk hiasan blob agar bergerak melayang */
 @keyframes float-bg {
     0% { transform: translate(0, 0); }
     100% { transform: translate(20px, 30px); }
 }
 
+/* Pembungkus foto profil agar bisa diberi hiasan */
 .profile-wrapper {
     position: relative;
     display: inline-block;
     padding: 15px;
 }
 
+/* Kotak hiasan di belakang foto profil yang miring */
 .profile-back {
     position: absolute;
     top: 0; right: 0; width: 100%; height: 100%;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     border-radius: 24px;
-    transform: rotate(5deg);
+    transform: rotate(5deg); /* Membuat kotaknya miring 5 derajat */
     opacity: 0.15;
     transition: 0.4s;
 }
 
+/* Gaya foto profil */
 .profile-img {
     position: relative;
-    z-index: 2;
+    z-index: 2;         /* Di atas profile-back */
     border-radius: 20px;
-    transform: rotate(-3deg);
+    transform: rotate(-3deg); /* Foto miring berlawanan arah dengan hiasan belakang */
     transition: 0.4s;
     border: 4px solid rgba(255,255,255,0.8);
     width: 100%;
@@ -167,29 +213,71 @@ body.dark-mode .theme-badge {
     object-fit: cover;
 }
 
-body.dark-mode .profile-img {
-    border-color: rgba(255,255,255,0.2);
-}
-
+/* Animasi saat foto profil di-hover (foto melurus dan membesar sedikit) */
 .profile-wrapper:hover .profile-img {
     transform: rotate(0deg) scale(1.02);
     box-shadow: 0 15px 30px rgba(79, 70, 229, 0.2);
 }
 
+/* Hiasan belakang ikut miring lebih banyak saat di-hover */
 .profile-wrapper:hover .profile-back {
     transform: rotate(8deg);
 }
 
-/* --- ABOUT SECTION --- */
+/* --- ABOUT SECTION (Bagian Tentang Saya) --- */
+/* Gaya kartu putih pembungkus deskripsi diri */
 .about-card {
     background: var(--card-bg);
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.05); /* Bayangan sangat halus */
     border: 1px solid var(--border-color);
 }
 
-/* --- SKILLS GRID --- */
+/* Kotak statistik kecil (misal: Semester, Fokus, Status) */
+.about-stat-box {
+    padding: 20px 15px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    background: rgba(79, 70, 229, 0.05);
+    transition: 0.3s;
+}
+
+/* Animasi stat box saat di-hover */
+.about-stat-box:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+/* --- TIMELINE PENDIDIKAN (Riwayat Sekolah) --- */
+/* Garis vertikal panjang di riwayat pendidikan */
+.timeline-item {
+    position: relative;
+    border-left: 2px solid #e2e8f0;
+}
+
+/* Bulatan (marker) di setiap poin riwayat pendidikan */
+.timeline-marker {
+    position: absolute;
+    left: -7px;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+/* Warna background label tahun (misal: 2021-Sekarang) */
+.bg-primary-subtle {
+    background-color: rgba(79, 70, 229, 0.1) !important;
+    color: var(--primary) !important;
+}
+
+/* --- SKILLS GRID (Bagian Keahlian) --- */
+/* Kotak pembungkus ikon skill (Python, PHP, dll) */
 .skill-box {
     background: var(--card-bg);
     padding: 20px;
@@ -204,6 +292,7 @@ body.dark-mode .profile-img {
     justify-content: center;
 }
 
+/* Animasi skill box saat di-hover mouse */
 .skill-box:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(79, 70, 229, 0.1);
@@ -213,14 +302,12 @@ body.dark-mode .profile-img {
 .skill-box img { width: 45px; height: 45px; margin-bottom: 10px; }
 .skill-name { font-weight: 600; font-size: 0.9rem; color: var(--text-main); }
 
-/* --- CONTACT ICONS --- */
+/* --- CONTACT ICONS (Tombol Sosial Media) --- */
+/* Gaya tombol bulat LinkedIn, Github, dll */
 .social-btn {
-    width: 55px;
-    height: 55px;
+    width: 55px; height: 55px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     font-size: 1.5rem;
     transition: 0.3s;
     background: var(--card-bg);
@@ -228,21 +315,24 @@ body.dark-mode .profile-img {
     color: var(--text-main);
 }
 
+/* Animasi saat tombol disorot mouse */
 .social-btn:hover {
     transform: translateY(-5px);
     color: white;
 }
 
+/* Memberikan warna khas masing-masing aplikasi saat di-hover */
 .btn-mail:hover { background: #EA4335; border-color: #EA4335; }
 .btn-linkedin:hover { background: #0077b5; border-color: #0077b5; }
 .btn-github:hover { background: #333; border-color: #333; }
 
-/* --- MOBILE OPTIMIZATION --- */
+/* --- MOBILE OPTIMIZATION (Tampilan HP) --- */
+/* Kode di dalam sini hanya aktif jika layar di bawah 768px (HP/Tablet) */
 @media (max-width: 768px) {
     .hero { text-align: center; padding-top: 100px; }
     .hero h1 { font-size: 2.2rem; }
     .profile-wrapper { margin-top: 40px; }
-    .bg-shape { display: none; } 
-    .about-card { padding: 25px; }
+    .bg-shape { display: none; }  /* Menghapus hiasan blob di HP agar tidak berat */
+    .about-card { padding: 25px; } /* Mengecilkan padding kartu di HP */
     #btn-back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
 }
